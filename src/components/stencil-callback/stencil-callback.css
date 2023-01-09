@@ -1,0 +1,9 @@
+:host {
+  display: block;  
+}
+
+button {
+  width: 200px;
+  padding: 5px;
+  
+}
