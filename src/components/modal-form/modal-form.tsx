@@ -6,10 +6,9 @@ type Fase = 'TELA_BUSCA_PLACA' | 'LOADING' | 'TELA_CONFIRMA_PREÇO';
   tag: 'modal-form',
   styleUrl: 'modal-form.css',
   shadow: true,
+  assetsDirs: ['fotos'],
 })
 export class ModalForm {
-  // @Prop onDone: (v: number)
-
   @Prop() callback: string;
 
   @State() fase: Fase = 'TELA_BUSCA_PLACA';
@@ -23,14 +22,13 @@ export class ModalForm {
   ender: EventEmitter<number>;
 
   handlePlacaInput = ev => {
-    console.log({ ev }, ev.path[0], ev.path[0].value);
     this.placa = ev.path[0].value;
   };
 
   handleBusca = () => {
     this.fase = 'LOADING';
     this.valor = 30000 + Math.floor(Math.random() * 100) * 100;
-    setTimeout(() => (this.fase = 'TELA_CONFIRMA_PREÇO'), 500);
+    setTimeout(() => (this.fase = 'TELA_CONFIRMA_PREÇO'), 1000);
   };
 
   handleEnd = () => {
@@ -38,7 +36,6 @@ export class ModalForm {
       let fnName = this.callback.replace('()', '');
       if (typeof window[fnName] === 'function') {
         window[fnName](this.valor);
-        console.log('callback ok...', this.ender);
         this.ender.emit(this.valor);
       }
     }

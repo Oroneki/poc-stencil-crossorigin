@@ -1,28 +1,41 @@
 :host {
   display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: white;
   padding: 24px;
   flex-direction: column;  
   width: 350px;
   box-sizing: border-box;
-  align-items: center;
-  justify-content: center;
   border-radius: 4px;
-  min-height: 350px;
-}
- :host * {
+  min-height: 320px;
+  box-shadow: 4px 4px 12px 0px #0000000d;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-  margin-bottom: 12px;
-  min-width: 50%;
- }
+}
+
+:host * {
+
+ margin-bottom: 12px;
+ min-width: 50%;
+}
+
+h3 {
+  margin: 0
+}
 
  input {
   font-size: 2rem;
-  max-width: 280px;
+  max-width: 220px;
+  text-align: center;
  }
 
  button {
   padding: 6px;
+ }
+
+ image {
+  width: 300px;
  }
 
  .valor {

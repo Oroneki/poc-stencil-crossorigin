@@ -14,7 +14,6 @@ export class TradeInButton {
   @Prop({ attribute: 'callback' }) onValueReceived: string;
 
   handleDone = ev => {
-    console.log({ ev });
     this.selectedValue = ev.detail;
     this.isOpenModal = false;
   };
@@ -25,7 +24,6 @@ export class TradeInButton {
   };
 
   connectedCallback() {
-    console.log('button:', this.onValueReceived);
     window.addEventListener('__DONE__', this.handleDone);
   }
 

@@ -9,6 +9,13 @@ export const config: Config = {
     },
     {
       type: 'dist-custom-elements',
+      copy: [
+        {
+          src: '**/*.{jpg,png}',
+          dest: 'dist/components/fotos',
+          warn: true,
+        },
+      ],
     },
     {
       type: 'docs-readme',
