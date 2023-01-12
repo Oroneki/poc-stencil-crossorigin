@@ -6,13 +6,32 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface ModalForm {
+        "callback": string;
+    }
     interface StencilCallback {
     }
     interface StencilOutraOrigem {
         "callback": () => any;
     }
+    interface TradeInButton {
+        "onValueReceived": string;
+    }
+    interface TradeInModal {
+        "callback": string;
+    }
+}
+export interface ModalFormCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLModalFormElement;
 }
 declare global {
+    interface HTMLModalFormElement extends Components.ModalForm, HTMLStencilElement {
+    }
+    var HTMLModalFormElement: {
+        prototype: HTMLModalFormElement;
+        new (): HTMLModalFormElement;
+    };
     interface HTMLStencilCallbackElement extends Components.StencilCallback, HTMLStencilElement {
     }
     var HTMLStencilCallbackElement: {
@@ -25,28 +44,59 @@ declare global {
         prototype: HTMLStencilOutraOrigemElement;
         new (): HTMLStencilOutraOrigemElement;
     };
+    interface HTMLTradeInButtonElement extends Components.TradeInButton, HTMLStencilElement {
+    }
+    var HTMLTradeInButtonElement: {
+        prototype: HTMLTradeInButtonElement;
+        new (): HTMLTradeInButtonElement;
+    };
+    interface HTMLTradeInModalElement extends Components.TradeInModal, HTMLStencilElement {
+    }
+    var HTMLTradeInModalElement: {
+        prototype: HTMLTradeInModalElement;
+        new (): HTMLTradeInModalElement;
+    };
     interface HTMLElementTagNameMap {
+        "modal-form": HTMLModalFormElement;
         "stencil-callback": HTMLStencilCallbackElement;
         "stencil-outra-origem": HTMLStencilOutraOrigemElement;
+        "trade-in-button": HTMLTradeInButtonElement;
+        "trade-in-modal": HTMLTradeInModalElement;
     }
 }
 declare namespace LocalJSX {
+    interface ModalForm {
+        "callback"?: string;
+        "on__DONE__"?: (event: ModalFormCustomEvent<number>) => void;
+    }
     interface StencilCallback {
     }
     interface StencilOutraOrigem {
         "callback"?: () => any;
     }
+    interface TradeInButton {
+        "onValueReceived"?: string;
+    }
+    interface TradeInModal {
+        "callback"?: string;
+    }
     interface IntrinsicElements {
+        "modal-form": ModalForm;
         "stencil-callback": StencilCallback;
         "stencil-outra-origem": StencilOutraOrigem;
+        "trade-in-button": TradeInButton;
+        "trade-in-modal": TradeInModal;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "modal-form": LocalJSX.ModalForm & JSXBase.HTMLAttributes<HTMLModalFormElement>;
             "stencil-callback": LocalJSX.StencilCallback & JSXBase.HTMLAttributes<HTMLStencilCallbackElement>;
             "stencil-outra-origem": LocalJSX.StencilOutraOrigem & JSXBase.HTMLAttributes<HTMLStencilOutraOrigemElement>;
+            "trade-in-button": LocalJSX.TradeInButton & JSXBase.HTMLAttributes<HTMLTradeInButtonElement>;
+            "trade-in-modal": LocalJSX.TradeInModal & JSXBase.HTMLAttributes<HTMLTradeInModalElement>;
         }
     }
 }
