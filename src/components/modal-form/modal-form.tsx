@@ -28,7 +28,7 @@ export class ModalForm {
     this.placa = placa.toUpperCase?.();
     placaValidator
       .validate(this.placa)
-      .then(p => (this.errorMessage = ''))
+      .then(() => (this.errorMessage = ''))
       .catch(err => {
         this.errorMessage = err.message;
       });
