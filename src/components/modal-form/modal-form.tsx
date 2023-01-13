@@ -1,4 +1,5 @@
 import { Component, Host, h, State, Prop, EventEmitter, Event } from '@stencil/core';
+import { placaValidator } from '../../utils/utils';
 
 type Fase = 'TELA_BUSCA_PLACA' | 'LOADING' | 'TELA_CONFIRMA_PREÇO';
 
@@ -14,6 +15,7 @@ export class ModalForm {
   @State() fase: Fase = 'TELA_BUSCA_PLACA';
   @State() placa = '';
   @State() valor = 0;
+  @State() errorMessage = '';
 
   @Event({
     eventName: '__DONE__',
@@ -22,7 +24,14 @@ export class ModalForm {
   ender: EventEmitter<number>;
 
   handlePlacaInput = ev => {
-    this.placa = ev.path[0].value;
+    const placa = ev.target?.value ?? ev.path?.[0]?.value;
+    this.placa = placa.toUpperCase?.();
+    placaValidator
+      .validate(this.placa)
+      .then(p => (this.errorMessage = ''))
+      .catch(err => {
+        this.errorMessage = err.message;
+      });
   };
 
   handleBusca = () => {
@@ -48,7 +57,8 @@ export class ModalForm {
           <Host>
             <h3>Buscar placa</h3>
             <input type="text" maxLength={7} value={this.placa} onInput={this.handlePlacaInput}></input>
-            <button disabled={this.placa.length !== 7} onClick={this.handleBusca}>
+            {this.errorMessage?.length > 0 && <span class="error">{this.errorMessage}</span>}
+            <button disabled={this.placa.length !== 7 && this.errorMessage.length !== 0} onClick={this.handleBusca}>
               Avaliar
             </button>
           </Host>
